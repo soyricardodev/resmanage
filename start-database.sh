@@ -49,5 +49,5 @@ docker run -d \
   --name $DB_CONTAINER_NAME \
   -e POSTGRES_PASSWORD="$DB_PASSWORD" \
   -e POSTGRES_DB=res-manage \
-  -p 5432:5432 \
+  -p 3001:5432 \
   docker.io/postgres && echo "Database container '$DB_CONTAINER_NAME' was successfully created"
