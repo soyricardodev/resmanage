@@ -1,8 +1,9 @@
 import "server-only";
 
-import { headers } from "next/headers";
 import { cache } from "react";
-
+import { headers } from "next/headers";
+import { NextRequest } from "next/server";
+import { getAuth } from "@clerk/nextjs/server";
 import { createCaller } from "~/server/api/root";
 import { createTRPCContext } from "~/server/api/trpc";
 
@@ -16,6 +17,7 @@ const createContext = cache(() => {
 
   return createTRPCContext({
     headers: heads,
+    auth: getAuth(new NextRequest("https://unused.com", { headers: heads })),
   });
 });
 
