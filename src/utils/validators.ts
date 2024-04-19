@@ -50,7 +50,7 @@ export const menuItemInput = z.object({
     .max(12, "Price cannot be longer than 12 characters"),
 });
 export const restaurantInput = z.object({
-  contactNo: z.union([
+  phone: z.union([
     z
       .string()
       .trim()
@@ -60,8 +60,6 @@ export const restaurantInput = z.object({
       ),
     z.literal(""),
   ]),
-  imageBase64: z.string(),
-  imagePath: z.string().min(1, "Image is required"),
   location: z
     .string()
     .trim()
@@ -72,7 +70,15 @@ export const restaurantInput = z.object({
     .trim()
     .min(1, "Name is required")
     .max(40, "Name cannot be longer than 40 characters"),
+  email: z
+    .string()
+    .email("Invalid email")
+    .trim()
+    .min(1, "Email is required")
+    .max(256, "Email cannot be longer than 256 characters"),
+  isPublished: z.boolean().default(false).optional(),
 });
+
 export const bannerInput = z.object({
   imageBase64: z.string().min(1, "Image is required"),
   restaurantId: z.string().cuid(),
