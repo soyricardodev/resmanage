@@ -30,41 +30,41 @@ export const restaurantRouter = createTRPCRouter({
         email: restaurants.email,
         phone: restaurants.phone,
         isPublished: restaurants.isPublished,
+        description: restaurants.description,
       })
       .from(restaurants)
       .where(eq(restaurants.userId, ctx.userId));
   }),
 
-  getMyRestaurant: protectedProcedure
+  getRestaurant: publicProcedure
     .input(restaurantId)
     .query(async ({ ctx, input }) => {
       return await ctx.db
         .select({
+          id: restaurants.id,
           name: restaurants.name,
           userId: restaurants.userId,
           location: restaurants.location,
           email: restaurants.email,
           phone: restaurants.phone,
           isPublished: restaurants.isPublished,
+          description: restaurants.description,
         })
         .from(restaurants)
-        .where(
-          and(
-            eq(restaurants.userId, ctx.userId),
-            eq(restaurants.id, input.restaurantId),
-          ),
-        );
+        .where(and(eq(restaurants.id, input.restaurantId)));
     }),
 
   getAll: publicProcedure.query(async ({ ctx }) => {
     return await ctx.db
       .select({
+        id: restaurants.id,
         name: restaurants.name,
         userId: restaurants.userId,
         location: restaurants.location,
         email: restaurants.email,
         phone: restaurants.phone,
         isPublished: restaurants.isPublished,
+        description: restaurants.description,
       })
       .from(restaurants);
   }),

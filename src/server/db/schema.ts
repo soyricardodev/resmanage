@@ -19,6 +19,7 @@ export const restaurants = createTable("restaurant", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 256 }),
   userId: varchar("userId", { length: 256 }),
+  description: varchar("description", { length: 256 }),
   location: varchar("location", { length: 256 }),
   email: varchar("email", { length: 256 }),
   phone: varchar("phone", { length: 256 }),
