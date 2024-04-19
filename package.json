@@ -10,7 +10,7 @@
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
-    "cz": "czg"
+    "cz": "czg emoji"
   },
   "dependencies": {
     "@clerk/nextjs": "5.0.0-beta.44",
