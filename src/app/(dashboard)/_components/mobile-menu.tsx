@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
@@ -39,12 +40,12 @@ export function MobileMenu() {
               <CookingPot className="size-6" />
               <span className="sr-only">ResManage</span>
             </Link>
-            {dashboardConfig.sidebarNav.map(({ items }) => {
+            {dashboardConfig.sidebarNav.map(({ items, title }) => {
               return (
-                <>
-                  {items.map(({ title, href, icon: Icon }) => (
+                <React.Fragment key={title}>
+                  {items.map(({ title, href, icon: Icon }, index) => (
                     <Link
-                      key={title}
+                      key={`${title}-${href}-${index}`}
                       href={href}
                       className={cn(
                         "mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 transition-colors",
@@ -57,7 +58,7 @@ export function MobileMenu() {
                       {title}
                     </Link>
                   ))}
-                </>
+                </React.Fragment>
               );
             })}
           </nav>
