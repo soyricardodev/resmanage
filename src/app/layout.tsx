@@ -1,13 +1,16 @@
 import "~/styles/globals.css";
 
-import { ClerkProvider } from "@clerk/nextjs";
-import { GeistSans } from "geist/font/sans";
-
-import { TRPCReactProvider } from "~/trpc/react";
-import { TailwindIndicator } from "~/components/tailwind-indicator";
 import type { Metadata, Viewport } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { TRPCReactProvider } from "~/trpc/react";
+import { GeistSans } from "geist/font/sans";
+import { extractRouterConfig } from "uploadthing/server";
+
 import { cn } from "~/lib/utils";
 import { ThemeProvider } from "~/components/providers";
+import { TailwindIndicator } from "~/components/tailwind-indicator";
+import { ourFileRouter } from "~/app/api/uploadthing/core";
 
 export const metadata: Metadata = {
   title: "ResManage - Administra tu resturante",
@@ -38,6 +41,7 @@ export default function RootLayout({
             GeistSans.variable,
           )}
         >
+          <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
           <TRPCReactProvider>
             <ThemeProvider
               attribute="class"
